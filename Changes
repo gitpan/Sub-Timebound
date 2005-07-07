@@ -1,0 +1,6 @@
+Revision history for Perl extension Sub::Timebound.
+
+1.00  Wed Jul  6 11:25:48 2005
+	- original version; created by h2xs 1.23 with options
+		-X -n Sub::Timebound
+
