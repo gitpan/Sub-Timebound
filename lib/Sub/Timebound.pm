@@ -24,7 +24,7 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
 our @EXPORT = qw(timeboundretry);
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 # Preloaded methods go here.
 
@@ -52,10 +52,11 @@ sub timeboundretry
 		local $SIG{'ALRM'} = sub { die $ref_string };
 		alarm($allocated);
 		$ret->{value} = $coderef->(@params);
-		alarm(0);
+		$ret->{status} = 1;	### We execute this means all is well
+		alarm(0);		### Reset alarm signal upon success
 	};
 
-	alarm(0);
+	alarm(0);	### Reset alarm signal
 
 	if ($@) {
 		$ret->{status} = 0; ### Inform the caller that function call did not succeed
